@@ -1,0 +1,249 @@
+body {
+    margin: 0;
+    min-height: 100vh;
+
+    background: linear-gradient(135deg, #080808, #24152f);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-family: Arial, sans-serif;
+    color: white;
+
+    overflow: hidden;
+}
+
+/* Caja principal */
+
+.contenedor {
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.65);
+
+    padding: 40px;
+    border-radius: 25px;
+
+    position: relative;
+    z-index: 2;
+}
+
+/* Imagen de Merlina */
+
+.tilin {
+    width: 200px;
+
+    animation: flotar 2s ease-in-out infinite;
+}
+
+/* Movimiento de la imagen */
+
+@keyframes flotar {
+
+    0% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-15px);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+
+}
+
+/* Título */
+
+h1 {
+    font-size: 30px;
+}
+
+/* Botones */
+
+button {
+    padding: 12px 25px;
+    margin: 10px;
+
+    border: none;
+    border-radius: 15px;
+
+    font-size: 18px;
+    cursor: pointer;
+}
+
+/* Corazones */
+
+.corazones span {
+    position: fixed;
+
+    font-size: 30px;
+
+    bottom: -50px;
+
+    animation: subir 6s linear infinite;
+
+    z-index: 1;
+}
+
+/* Posición de cada corazón */
+
+.corazones span:nth-child(1) {
+    left: 5%;
+}
+
+.corazones span:nth-child(2) {
+    left: 20%;
+    animation-delay: 1s;
+}
+
+.corazones span:nth-child(3) {
+    left: 35%;
+    animation-delay: 2s;
+}
+
+.corazones span:nth-child(4) {
+    left: 50%;
+    animation-delay: 3s;
+}
+
+.corazones span:nth-child(5) {
+    left: 65%;
+    animation-delay: 1.5s;
+}
+
+.corazones span:nth-child(6) {
+    left: 80%;
+    animation-delay: 2.5s;
+}
+
+.corazones span:nth-child(7) {
+    left: 95%;
+    animation-delay: 4s;
+}
+
+/* Movimiento de los corazones */
+
+@keyframes subir {
+
+    0% {
+        bottom: -50px;
+        opacity: 0;
+    }
+
+    20% {
+        opacity: 1;
+    }
+
+    100% {
+        bottom: 100%;
+        opacity: 0;
+    }
+
+}
+/* =========================
+   INTRO CUENTA REGRESIVA
+========================= */
+
+#introCumple {
+    position: fixed;
+    inset: 0;
+
+    z-index: 9999;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background:
+        linear-gradient(
+            rgba(5, 10, 20, 0.45),
+            rgba(5, 10, 20, 0.65)
+        ),
+        url("cumple.jpg");
+
+    background-size: cover;
+    background-position: center;
+
+    color: #eee;
+
+    transition: opacity 1.5s ease;
+}
+
+#introCumple.ocultar {
+    opacity: 0;
+    pointer-events: none;
+}
+
+#introCumple .cumple {
+    width: 90%;
+    max-width: 1000px;
+    text-align: center;
+}
+
+#introCumple h1 {
+    font-size: clamp(45px, 8vw, 90px);
+    letter-spacing: 8px;
+    color: #e7dfff;
+
+    text-shadow:
+        0 0 15px rgba(210, 190, 255, 0.35);
+
+    margin-bottom: 15px;
+}
+
+#introCumple .decoracion {
+    color: #cfc0ed;
+    font-size: 22px;
+    margin: 20px 0;
+    letter-spacing: 5px;
+}
+
+#introCumple .contador {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+}
+
+#introCumple .tiempo {
+    background: rgba(5, 5, 10, 0.82);
+
+    border: 1px solid #a99bc8;
+
+    padding: 25px 10px;
+    border-radius: 8px;
+
+    box-shadow:
+        0 0 15px rgba(0, 0, 0, 0.7),
+        inset 0 0 15px rgba(150, 130, 190, 0.08);
+}
+
+#introCumple .tiempo span {
+    display: block;
+
+    font-size: clamp(40px, 7vw, 75px);
+
+    color: #ddd0f5;
+
+    font-weight: bold;
+}
+
+#introCumple .tiempo small {
+    display: block;
+
+    margin-top: 10px;
+
+    color: #aaa;
+
+    letter-spacing: 3px;
+    font-size: 12px;
+}
+
+@media (max-width: 650px) {
+
+    #introCumple .contador {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+
+}
