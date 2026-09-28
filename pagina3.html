@@ -1,0 +1,360 @@
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Sorpresa 🖤</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: white;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+
+        /* =========================
+           VIDEO
+        ========================= */
+
+        video {
+            width: 100vw;
+            height: 100vh;
+
+            object-fit: contain;
+            object-position: center;
+
+            opacity: 0;
+
+            transition: opacity 2s ease;
+        }
+
+        video.mostrar {
+            opacity: 1;
+        }
+
+
+        /* =========================
+           CONFETI
+        ========================= */
+
+        .confeti {
+            position: fixed;
+
+            top: -20px;
+
+            width: 10px;
+            height: 18px;
+
+            z-index: 20;
+
+            pointer-events: none;
+
+            animation:
+                caer 4s linear forwards;
+        }
+
+        @keyframes caer {
+
+            0% {
+                transform:
+                    translateY(0)
+                    rotate(0deg);
+            }
+
+            100% {
+                transform:
+                    translateY(110vh)
+                    rotate(720deg);
+            }
+
+        }
+
+
+        /* =========================
+           FUEGOS ARTIFICIALES
+        ========================= */
+
+        .fuego {
+            position: fixed;
+
+            width: 7px;
+            height: 7px;
+
+            border-radius: 50%;
+
+            background: white;
+
+            z-index: 30;
+
+            pointer-events: none;
+
+            box-shadow:
+                0 0 8px white,
+                0 0 15px white;
+
+            animation:
+                explosion 1.2s ease-out forwards;
+        }
+
+
+        @keyframes explosion {
+
+            0% {
+
+                transform:
+                    translate(0, 0)
+                    scale(1);
+
+                opacity: 1;
+            }
+
+            100% {
+
+                transform:
+                    translate(var(--x), var(--y))
+                    scale(0);
+
+                opacity: 0;
+            }
+
+        }
+         #sonido {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    z-index: 9999;
+
+    padding: 12px 22px;
+
+    border: none;
+    border-radius: 20px;
+
+    background: black;
+    color: white;
+
+    font-size: 16px;
+    cursor: pointer;
+}
+
+  </style>
+  
+</head>
+<body>
+
+
+    <!-- VIDEO -->
+
+    <video id="video" autoplay muted playsinline>
+
+        <source src="zzz.mp4" type="video/mp4">
+
+    </video>
+    <button id="sonido">🔊 ACTIVAR SONIDO</button>
+
+    <script>
+
+        const video =
+            document.getElementById("video");
+
+
+        /* =========================
+           APARECER VIDEO
+        ========================= */
+
+        setTimeout(function() {
+
+            video.classList.add("mostrar");
+
+        }, 500);
+
+
+        /* =========================
+           CUANDO TERMINA EL VIDEO
+        ========================= */
+
+        video.addEventListener("ended", function() {
+
+            video.currentTime = 2;
+
+            video.play();
+
+        });
+
+
+        /* =========================
+           CREAR CONFETI
+        ========================= */
+
+        function crearConfeti() {
+
+            for (let i = 0; i < 80; i++) {
+
+                const confeti =
+                    document.createElement("div");
+
+                confeti.classList.add("confeti");
+
+
+                confeti.style.left =
+                    Math.random() * 100 + "vw";
+
+
+                confeti.style.animationDuration =
+                    (2 + Math.random() * 3) + "s";
+
+
+                confeti.style.animationDelay =
+                    Math.random() * 2 + "s";
+
+
+                confeti.style.background =
+                    "hsl(" +
+                    Math.random() * 360 +
+                    ", 100%, 60%)";
+
+
+                document.body.appendChild(confeti);
+
+
+                setTimeout(function() {
+
+                    confeti.remove();
+
+                }, 6000);
+
+            }
+
+        }
+
+
+        /* =========================
+           FUEGO ARTIFICIAL
+        ========================= */
+
+        function crearFuego() {
+
+            const centroX =
+                Math.random() *
+                window.innerWidth;
+
+
+            const centroY =
+                Math.random() *
+                (window.innerHeight * 0.6);
+
+
+            for (let i = 0; i < 50; i++) {
+
+                const fuego =
+                    document.createElement("div");
+
+
+                fuego.classList.add("fuego");
+
+
+                fuego.style.left =
+                    centroX + "px";
+
+
+                fuego.style.top =
+                    centroY + "px";
+
+
+                const angulo =
+                    Math.random() *
+                    Math.PI * 2;
+
+
+                const distancia =
+                    80 +
+                    Math.random() * 180;
+
+
+                fuego.style.setProperty(
+                    "--x",
+                    Math.cos(angulo) *
+                    distancia + "px"
+                );
+
+
+                fuego.style.setProperty(
+                    "--y",
+                    Math.sin(angulo) *
+                    distancia + "px"
+                );
+
+
+                document.body.appendChild(fuego);
+
+
+                setTimeout(function() {
+
+                    fuego.remove();
+
+                }, 1200);
+
+            }
+
+        }
+
+
+        /* =========================
+   EMPIEZA LA FIESTA 🎉
+========================= */
+
+setTimeout(function() {
+
+    crearConfeti();
+    crearFuego();
+
+    /* CONFETI INFINITO 🎉 */
+
+    setInterval(function() {
+
+        crearConfeti();
+
+    }, 4000);
+
+
+    /* FUEGOS INFINITOS 🎆 */
+
+    setInterval(function() {
+
+        crearFuego();
+
+    }, 1000);
+
+}, 500);
+const botonSonido = document.getElementById("sonido");
+
+botonSonido.addEventListener("click", function() {
+
+    video.muted = false;
+    video.volume = 1;
+
+    botonSonido.style.display = "none";
+
+});
+
+    </script>
+
+</body>
+
+</html>
+```
